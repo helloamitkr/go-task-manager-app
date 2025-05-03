@@ -50,3 +50,16 @@ status (in_progress, on hold, done)
 remarks string
 createdat time.Time
 updatedat time.Time
+
+
+#db connection using kubernetes
+kubectl run mysql \
+  --image=mysql:8 \
+  --env="MYSQL_DATABASE=taskdb" \
+  --env="MYSQL_ROOT_PASSWORD=password" \
+  --port=3306
+
+
+kubectl expose pod mysql --port=3306 --target-port=3306 --name=mysql-service
+
+kubectl port-forward service/mysql-service 3306:3306
