@@ -15,5 +15,9 @@ func InitilizeRouter() *gin.Engine {
 	{
 		taskRouter.POST("/", handlers.CreateNewTask)
 	}
+	userRouter := router.Group("/users")
+	{
+		userRouter.POST("new")
+	}
 	return router
 }
